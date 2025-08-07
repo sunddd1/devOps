@@ -18,7 +18,7 @@ jobs:
           npm install @salesforce/cli --global
 
       - name: Create server.key from Secret
-        run: echo "${{ secrets.SF_JWT_KEY }}" > server.key
+        run: echo "${{ secrets.SALESFORCE_SERVER_KEY }}" > server.key
 
       - name: Set permissions for server.key
         run: chmod 600 server.key
