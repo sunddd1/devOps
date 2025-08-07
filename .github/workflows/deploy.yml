@@ -24,18 +24,18 @@ jobs:
 
       - name: Authenticate to Salesforce (JWT)
         run: |
-          sfdx force:auth:jwt:grant \
-            --clientid "${{ secrets.SF_CONSUMER_KEY }}" \
-            --jwtkeyfile server.key \
-            --username "${{ secrets.SF_USERNAME }}" \
-            --instanceurl https://login.salesforce.com \
+          sfdx force:auth:jwt:grant
+            --clientid "${{ secrets.SF_CONSUMER_KEY }}"
+            --jwtkeyfile server.key
+            --username "${{ secrets.SF_USERNAME }}"
+            --instanceurl https://login.salesforce.com
             --setdefaultusername
 
       - name: Deploy to Salesforce
         run: |
-          sfdx force:source:deploy \
-            -p force-app \
-            --testlevel RunLocalTests \
+          sfdx force:source:deploy
+            -p force-app
+            --testlevel RunLocalTests
             --json > deploy-result.json
 
       - name: Show Deployment Result (if failed)
