@@ -1,0 +1,25 @@
+<template>
+    <template if:true={isBTN}>
+        <c-custom-related-view-all
+            object-api-name={objectApiName}
+            object-label={objectLabel}
+            parent-object-label={parentObjectLabel}
+            parent-object={parentObject}
+            parent-record-id={parentRecordId}
+            parent-record-name={parentRecordName}
+            refresh-event-name={refreshEventName}
+            columns={columns}
+            records={records}
+            max-row-count={maxRowCount}
+            total-count={totalCount}
+            sort-direction={sortDirection}
+            sort-by={sortBy}
+            is-infinite-load={isInfiniteLoad}
+            is-use-refresh-action={isUseRefreshAction}
+            onsortdata={sortdata}
+            onloadmore={loadmore}
+            custom-actions={customActions}
+        > 
+        </c-custom-related-view-all>
+    </template>
+</template>

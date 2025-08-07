@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <!-- <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="maxRowCount" type="Integer" label="Max Row Count" default="10" description="Set Max Row Count" required="true"/>
+            <property name="title" type="String" label="Related List title" default="" description="Related List Title"/>
+            <property name="recordId" type="String" label="recordId" default="" description="recordId" required="true"/>
+            <property name="relatedObjectApiName" type="String" label="Object API Name" default="" description="Object API Name" required="true"/>
+        </targetConfig>
+    </targetConfigs> -->
+</LightningComponentBundle>

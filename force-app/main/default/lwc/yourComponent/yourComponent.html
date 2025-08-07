@@ -1,0 +1,23 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 03-04-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  <lightning-card>
+	  <div style="width: 100% !important;">
+		  <!-- show a spinner -->
+		  <div if:false={isLoaded} class="slds-is-relative">
+				<lightning-spinner alternative-text="Loading...">
+				</lightning-spinner>
+		  </div>
+	  
+		  <!-- slickGrid container-->
+		  <div class="grid-container slds-p-horizontal">
+				<div class="user-grid" style="width: 100% !important;"></div>
+		  </div>
+	  </div>
+  </lightning-card>
+</template>

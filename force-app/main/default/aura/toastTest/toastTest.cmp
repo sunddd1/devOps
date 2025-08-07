@@ -1,0 +1,20 @@
+<!--
+  @description       : 
+  @author            : 
+  @group             : 
+  @last modified on  : 07-01-2025
+  @last modified by  : 
+  Modifications Log
+  Ver   Date         Author   Modification
+  1.0   07-01-2025      Initial Version
+-->
+<aura:component implements="flexipage:availableForRecordHome" >
+    <aura:html tag="style">
+        .toastMessage.forceActionsText{
+            white-space : pre-line !important;
+        }
+    </aura:html>
+        <div>
+            <lightning:button label="Toast Msg" variant="brand-outline" onclick="{!c.handleToastMsg}" ></lightning:button>
+        </div>
+</aura:component>

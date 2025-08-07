@@ -1,0 +1,19 @@
+<!--
+  @description       : 
+  @author            : woomg@dkbmc.com
+  @group             : 
+  @last modified on  : 2024-10-23
+  @last modified by  : sungnam.kimr_d@dkbmc.com
+  Modifications Log
+  Ver   Date         Author            Modification
+  1.0   2024-07-01   woomg@dkbmc.com   Initial Version
+-->
+<apex:page controller="CustomQueryController" 
+    contentType="application/x-JavaScript; charset=utf-8" 
+    showHeader="false" 
+    sidebar="false"
+    readOnly="true" 
+    standardStylesheets="false" >
+
+    {!records}
+</apex:page>

@@ -1,0 +1,149 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 01-11-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <article>
+        <template if:true={showSpinner}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
+        
+        <div class="container">
+            <!--  style="padding-top: 4px;" -->
+            <div class="slds-page-header"> 
+                <div class="slds-page-header__row">
+                    <div class="slds-media__body slds-align-middle">
+                        <nav role="navigation" aria-label="Breadcrumbs">
+                            <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                                <li class="slds-breadcrumb__item slds-line-height--reset">
+                                    <a onclick={navigateToObjectHome}>{parentObjectLabel}</a>
+                                </li>
+    
+                                <li class="slds-breadcrumb__item slds-line-height--reset">
+                                    <a onclick={navigateToRecordPage}>{parentRecordName}</a>
+                                </li>
+                            </ol>
+                        </nav>
+    
+                        <div class="slds-media">
+                            <div class="slds-media__body">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                        <h1>
+                                            <span class="slds-page-header__title slds-truncate" title={objectLabel}>{objectLabel}</span>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-page-header__col-actions">
+                        <div class="slds-page-header__controls">
+                            <!-- <lightning-button-icon icon-name="utility:refresh" variant="border-filled" alternative-text="Refresh" class="slds-m-top_large slds-m-right_small" onclick={refreshData}></lightning-button-icon> -->
+                            
+                            
+                            <ul class="branding-actions slds-button-group slds-m-left--xx-small small oneActionsRibbon forceActionsContainer">
+                                
+                                <template if:true={isUseCreateAction}>
+                                    <template if:true={hasCreateAccess}>
+                                            <li class="slds-button slds-button--neutral">
+                                            <!-- <lightning-button
+                                            alternative-text={LABEL.COM_BTN_NEW}
+                                            label={LABEL.COM_BTN_NEW}
+                                            onclick={newAction}>
+                                            </lightning-button> -->
+                                            <a
+                                            class="forceActionLink"
+                                            onclick={newAction}
+                                            title={LABEL.COM_BTN_NEW}
+                                            >
+                                                <div>{LABEL.COM_BTN_NEW}</div>
+                                            </a>
+                                        </li>
+                                        </template>
+                                    </template>
+                                <template if:true={setHeaderBTN}>
+                                    <template for:each={headerActions} for:item="item">
+                                        <li key={item.title} class="slds-button slds-button--neutral">
+                                            <!-- <lightning-button
+                                            alternative-text={item.label}
+                                            label={item.label}
+                                            title={item.title}
+                                            onclick={customHeaderAction}>
+                                            </lightning-button> -->
+                                            <a
+                                            class="forceActionLink"
+                                            onclick={customHeaderAction}
+                                            title={item.title}
+                                            >
+                                                <div>{item.label}</div>
+                                            </a>
+                                        </li>
+                                    </template>
+                                </template>
+                            </ul>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-align-bottom">
+                        <p class="slds-text-body--small">
+                            <template if:false={showSpinner}>
+                                <span>{getSummary} </span>
+                                <template if:true={getSortedName}>
+                                    <span> • {LABEL.COM_LAB_SORTED_BY} {getSortedName}</span>
+                                </template>
+                                <template if:true={isUseRefreshAction}>
+                                    <template if:false={currentUserLanguage}>
+                                        <span> • {LABEL.COM_LAB_UPDATED} <lightning-relative-date-time value={updatedDate}></lightning-relative-date-time></span>
+                                    </template>
+                                    <template if:true={currentUserLanguage}>
+                                        <span> • <lightning-relative-date-time value={updatedDate}></lightning-relative-date-time> {LABEL.COM_LAB_UPDATED}</span>
+                                    </template>
+                                </template>
+                            </template>
+
+                            <template if:true={showSpinner}>
+                                <span>{LABEL.COM_MSG_REFRESH_LIST}</span>
+                            </template>
+                        </p>
+                    </div>
+                    <div class="slds-col slds-no-flex slds-grid slds-align-bottom">
+                        <template if:true={isUseRefreshAction}>
+                            <lightning-button-icon
+                            class={getRefreshBtnStyle}
+                            icon-name="utility:refresh"
+                            variant="border-filled"
+                            alternative-text="Refresh"
+                            onclick={refreshData}>
+                            </lightning-button-icon>
+                        </template>
+                        <!-- <lightning-button-icon icon-name="utility:refresh" variant="border-filled" alternative-text="Refresh" onclick={refreshData}></lightning-button-icon> -->
+                    </div>
+                </div>
+            </div>
+            <!--  slds-scrollable_y -->
+            <div class="body">
+                <c-custom-datatable
+                    key-field="Id"
+                    data={records}
+                    columns={columns}
+                    sorted-by={sortBy}
+                    onsort={handleSort}
+                    sorted-direction={sortDirection}
+                    column-widths-mode="fixed"
+                    hide-checkbox-column
+                    show-row-number-column
+                    enable-infinite-loading={isInfiniteLoad}
+                    onloadmore={loadmore}
+                    onrowaction={handleRowAction}>
+                </c-custom-datatable>
+            </div>
+        </div>
+    </article>
+</template>

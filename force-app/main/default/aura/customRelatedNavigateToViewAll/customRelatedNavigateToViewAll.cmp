@@ -1,0 +1,13 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 01-11-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <div class="slds-card">
+        {!v.body}
+    </div>
+</aura:component>

@@ -1,0 +1,31 @@
+.firstHeaderRow {
+    flex-grow: 1;
+    /* display: flex; */
+    align-items: center;
+}
+
+.listViewContainer {
+    width: 100%;
+    display: flex;
+    border-top: solid 1px #DDDBDA;
+    overflow-x: auto;
+}
+
+.footer {
+    margin-top: 0;
+    /* height: 2rem; */
+}
+
+.footer-view_all {
+    display: block;
+    /* padding: 0.47rem; */
+    font-size: 0.8125rem;
+}
+
+.titleLink{
+    color: black;
+}
+
+.align-center{
+    align-self: center;
+}

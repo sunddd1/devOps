@@ -1,0 +1,15 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-21-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader,lightning:isUrlAddressable">
+<!-- <aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" description="My Lightning Component"> -->
+    <lightning:quickActionAPI aura:id="quickActionAPI" />
+    <div>
+        <lightning:button label="Select Update Case Action" onclick="{!c.selectUpdateCaseAction}"/>
+        <lightning:button label="Update Case Status Field" onclick="{!c.updateCaseStatusAction}"/>
+    </div>
+</aura:component>

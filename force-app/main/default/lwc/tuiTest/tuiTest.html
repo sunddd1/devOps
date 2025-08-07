@@ -1,0 +1,25 @@
+<!--
+  @description       : 
+  @author            : sungnam.kimr_d@dkbmc.com
+  @group             : 
+  @last modified on  : 2024-10-18
+  @last modified by  : sungnam.kimr_d@dkbmc.com
+  Modifications Log
+  Ver   Date         Author                     Modification
+  1.0   2024-10-14   sungnam.kimr_d@dkbmc.com   Initial Version
+-->
+<template>
+    <lightning-button label="appendRow" onclick={apiAction} data-action-name="appendRow"></lightning-button>
+    <lightning-button label="removeRow" onclick={apiAction} data-action-name="removeRow"></lightning-button>
+    <lightning-button label="createData" onclick={apiAction} data-action-name="createData"></lightning-button>
+    <lightning-button label="updateData" onclick={apiAction} data-action-name="updateData"></lightning-button>
+    <lightning-button label="deleteData" onclick={apiAction} data-action-name="deleteData"></lightning-button>
+		<div class="tui-wrapper">
+			<div class="tui" lwc:ref="tui"></div>
+		</div>
+
+		<!-- <lwc:component lwc:is={componentConstructor}
+				lwc:ref="myCmp"
+				lwc:spread={childProps}>
+		</lwc:component> -->
+</template>

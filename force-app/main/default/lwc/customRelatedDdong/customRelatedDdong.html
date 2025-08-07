@@ -1,0 +1,28 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 01-29-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+
+<template>
+	<c-custom-related
+        related-object-api-name={relatedObjectApiName}
+        record-id={recordId}
+        related-title={title}
+        columns-info={columnsInfo}
+        records={records}
+        max-row-count={maxRowCount}
+        total-count={totalCount}
+        sort-direction={sortDirection}
+        sort-by={sortBy}
+        onsortdata={sortdata}
+        is-use-refresh-action={isUseRefreshAction}
+        custom-actions={customActions}
+        view-all-lwc-component-name={viewAllLwcComponentName}
+        is-use-edit-action={isUseEditAction}
+        is-use-delete-action={isUseDeleteAction}
+    >
+    </c-custom-related>
+</template>

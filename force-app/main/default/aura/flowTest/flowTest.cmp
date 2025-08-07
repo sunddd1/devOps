@@ -1,0 +1,14 @@
+<!--
+  @description       : 
+  @author            : 
+  @group             : 
+  @last modified on  : 07-29-2025
+  @last modified by  : 
+  Modifications Log
+  Ver   Date         Author   Modification
+  1.0   07-29-2025      Initial Version
+-->
+<aura:component description="LightningFlow" implements="lightning:availableForFlowScreens,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global">
+    <c:testButton></c:testButton>
+</aura:component>

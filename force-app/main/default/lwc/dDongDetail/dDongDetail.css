@@ -1,0 +1,37 @@
+/* .custom-Icon{
+    display: inline-flex;
+} */
+
+.field-label {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    display: inline-block;
+    color: var(--slds-g-color-neutral-base-30, var(--lwc-colorTextLabel,rgb(68, 68, 68)));
+    font-size: 0.75rem;
+    padding-right: var(--lwc-spacingXSmall,0.5rem);
+    padding-top: var(--lwc-spacingXxSmall,0.25rem);
+}
+
+.field-td {
+    padding-left: var(--lwc-spacingSmall,0.75rem);
+    padding-right: var(--lwc-spacingSmall,0.75rem);
+
+}
+
+.section-div {
+    padding-top: var(--lwc-spacingXSmall,0.5rem);
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+    display: flex;
+}
+
+.section-label{
+    margin-top: var(--lwc-spacingMedium,1rem);
+    cursor: pointer;
+    padding-left: 8px;
+    /* font-size: 16px; */
+}

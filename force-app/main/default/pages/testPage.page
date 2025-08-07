@@ -1,0 +1,17 @@
+<!--
+  @description       : 
+  @author            : 
+  @group             : 
+  @last modified on  : 07-28-2025
+  @last modified by  : 
+  Modifications Log
+  Ver   Date         Author   Modification
+  1.0   07-28-2025      Initial Version
+-->
+<!-- <apex:page contentSecurityPolicy="frame-ancestors 'self' https://*.salesforce.com https://*.force.com"> -->
+<apex:page cspHeader="true">
+<!-- Begin Default Content REMOVE THIS -->
+<h1>Congratulations</h1>
+This is your new Page
+<!-- End Default Content REMOVE THIS -->
+</apex:page>

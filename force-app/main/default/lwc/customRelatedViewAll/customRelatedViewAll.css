@@ -1,0 +1,28 @@
+.slds-card {
+}
+
+.footer {
+    margin-top: 0;
+    height: 2rem;
+}
+
+.slds-page-header{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 1px solid rgb(201, 201, 201);
+}
+
+.container {
+    /* border: 1px solid #dddbda; */
+    /* border-radius: 0.25rem; */
+    /* height: calc(100vh - 198px);
+    max-height: calc(100vh - 198px); */
+}
+
+.body {
+    height: calc(100vh - 197px);
+    max-height: calc(100vh - 197px);
+    /* height: inherit; */
+    /* height: 100%;
+    position: relative; */
+}

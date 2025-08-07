@@ -1,0 +1,91 @@
+<template>
+    
+    <div class="slds-is-relative detailContent" style="font-size: var(--lwc-inputStaticFontSize,0.875rem); background-color: white;">
+        <!-- spinner  -->
+        <template if:false={isShowModal}>
+            <lightning-spinner size="medium" alternative-text="Loading..."></lightning-spinner>
+            <div style="height: 20vh;"></div>
+        </template>
+        <div class="KLGRendStyle">
+            <lightning-record-view-form
+            object-api-name={objectApiName}
+            record-id={recordId}>
+                <template for:each={pageInfo} for:item="section">
+                    <div key={section}>
+                        <template if:true={section.labelView}>
+                            <h3 class="slds-theme--shade slds-section__title section-label" onclick={sectionView}>
+                                <lightning-icon icon-name={iconName} alternative-text={iconName} title={iconName} size="x-small"></lightning-icon>
+                                <span class="slds-p-left_xx-small">
+                                    {section.sectionLabel}
+                                </span>
+                            </h3>
+                        </template>
+                         
+                        <template if:false={section.IsOneColumn}>
+                            <div class="section-div">
+                                <template for:each={section.fieldInfos} for:item="row">
+                                    <table key={row} style="height: fit-content;">
+                                        <template for:each={row.fieldInfo} for:item="field">
+                                            <tr key={field}>
+                                                <td class="field-td">
+                                                    <template if:true={field.Name}>
+                                                        <div class="slds-border_bottom" style="display: flex; margin-bottom: 0.25rem;" >
+                                                            <lightning-output-field field-name={field.Name} style="margin-bottom: 0.25rem;"></lightning-output-field>
+                                                        </div>
+                                                    </template>
+                                                    <template if:false={field.Name}>
+                                                        <!-- <div style="height: 32px !important;"></div> -->
+                                                    </template>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </table>
+                                </template>
+                            </div>
+                        </template>
+
+                        <template if:true={section.IsOneColumn}>
+                            <div class="onerich">
+                                <template for:each={section.fieldInfos} for:item="row">
+                                    <div key={row} style="height: fit-content;">
+                                        <template for:each={row.fieldInfo} for:item="field">
+                                            <div key={field}>
+                                                <div class="field-td" style="height: fit-content !important;">
+                                                    <template if:false={field.IsRich}>
+                                                        <template if:true={field.Name}>
+                                                            <div class="slds-border_bottom isOneColumn">
+                                                                <!-- <div class="slds-border_bottom" style="margin-bottom: var(-lwc-spacingXSmall,0.5rem);"> -->
+                                                                <!-- <template if:true={field.isSummary}>
+                                                                    <span style="float: left; padding-left: 4px;">
+                                                                        <label class="slds-form-element__label slds-no-flex" style="margin-bottom: 0px; margin-top: 2px;">Answer Summary</label>
+                                                                    </span>
+                                                                </template> -->
+                                                                <lightning-output-field field-name={field.Name}></lightning-output-field>
+                                                            </div>
+                                                        </template>
+                                                    </template>
+    
+                                                    <template if:true={field.IsRich}>
+                                                        <div class="slds-form-element_1-col slds-form-element_horizontal slds-border_bottom" style="margin-bottom: 0.75rem !important;">
+                                                            <template if:false={isMobile}>
+                                                                <!-- <c-u-trans-modal source-txt='' data-trans={field.Name} class="ds_uTrans_button"></c-u-trans-modal> -->
+                                                            </template>
+                                                            <span class="field-label">{field.Label}</span>
+                                                            <div class="contentArea slds-scrollable" style="width: inherit;">
+                                                                <span class="contentT" data-field={field.Name} lwc:dom="manual"></span>
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            </lightning-record-view-form>
+        </div>
+    </div>
+</template>

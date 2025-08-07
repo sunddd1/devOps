@@ -1,0 +1,22 @@
+/**
+ * @description       : 
+ * @author            : sungnam.kimr_d@dkbmc.com
+ * @group             : 
+ * @last modified on  : 2024-10-14
+ * @last modified by  : sungnam.kimr_d@dkbmc.com
+ * Modifications Log
+ * Ver   Date         Author                     Modification
+ * 1.0   2024-10-14   sungnam.kimr_d@dkbmc.com   Initial Version
+**/
+import { api, LightningElement } from 'lwc';
+
+export default class Test extends LightningElement {
+
+	@api city;
+	@api state;
+	connectedCallback(){
+		console.log('aaaa');
+		console.log('city ## ', this.city);
+		console.log('state ## ', this.state);
+	}
+}

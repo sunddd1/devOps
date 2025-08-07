@@ -1,0 +1,120 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 01-15-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+	<article class="slds-card slds-card_boundary">
+		<div if:true={showSpinner}>
+			<lightning-spinner alternative-text="Loading..." ></lightning-spinner>
+		</div>
+		<div class="slds-page-header slds-page-header_joined slds-shrink-none test-headerRegion slds-is-relative">
+			<div class="slds-grid">
+				<!-- style="align-self: center;" -->
+				<div class={getHeaderStyle}>
+					<div class="slds-media slds-no-space slds-grow">
+						<template if:true={loadInfo.iconName}>
+							<lightning-icon icon-name={iconName} size="small" class="slds-m-right_small"></lightning-icon>
+						</template>
+						<div class="slds-media__body slds-align-middle">
+							<h2 class="slds-card__header-title">
+								<span class="slds-truncate slds-m-right--xx-small">
+									<template if:true={viewAllUrl}><a class="slds-card__header-link" onclick={viewAll} href=''>{relatedTitle} {titleCount}</a></template>
+									<template if:false={viewAllUrl}>{relatedTitle} {titleCount}</template>
+								</span>
+							</h2>
+						</div>
+					</div>
+				</div>
+
+				<div class="slds-page-header__col-actions">
+					<div class="slds-page-header__controls">
+						<template if:true={isUseRefreshAction}>
+							<lightning-button-icon
+								class={getRefreshBtnStyle}
+								icon-name="utility:refresh"
+								variant="border-filled"
+								alternative-text="Refresh"
+								onclick={refreshData}>
+							</lightning-button-icon>
+						</template>
+						
+						<template if:true={isUseCreateAction}>
+							<template if:true={hasCreateAccess}>
+								<lightning-button
+								class={getRefreshBtnStyle}
+								alternative-text={LABEL.COM_BTN_NEW}
+								label={LABEL.COM_BTN_NEW}
+								onclick={newAction}>
+								</lightning-button>
+							</template>
+						</template>
+						
+						<template if:true={setHeaderBTN}>
+							<template for:each={headerActions} for:item="item">
+								<div key={item.title}>
+									<lightning-button
+									class={getRefreshBtnStyle}
+									alternative-text={item.label}
+									label={item.label}
+									title={item.title}
+									onclick={customHeaderAction}>
+									</lightning-button>
+								</div>
+							</template>
+						</template>
+					</div>
+				</div>
+			</div>
+			<template if:true={hasRecords}>
+				<div class="slds-grid">
+					<div class="slds-col slds-align-bottom">
+						<p class="slds-text-body--small">
+							<span>{getSummary} </span>
+							<template if:true={getSortedName}>
+								<span> • {LABEL.COM_LAB_SORTED_BY} {getSortedName}</span>
+							</template>
+							<template if:true={isUseRefreshAction}>
+								<template if:false={currentUserLanguage}>
+									<span> • {LABEL.COM_LAB_UPDATED} <lightning-relative-date-time value={updatedDate}></lightning-relative-date-time></span>
+								</template>
+								<template if:true={currentUserLanguage}>
+									<span> • <lightning-relative-date-time value={updatedDate}></lightning-relative-date-time> {LABEL.COM_LAB_UPDATED}</span>
+								</template>
+							</template>
+						</p>
+					</div>
+					<div class="slds-col slds-no-flex slds-grid slds-align-bottom slds-shrink"></div>
+				</div>	
+			</template>
+		</div>
+		<template if:true={hasRecords}>
+			<div class="slds-grid listViewContainer">
+				<div class="table-border">
+					<c-custom-datatable
+						key-field="Id"
+						data={records}
+						columns={columns}
+						sorted-by={sortBy}
+						onsort={handleSort}
+						sorted-direction={sortDirection}
+						column-widths-mode="fixed"
+						hide-checkbox-column="true"
+						show-row-number-column="true"
+						min-column-width={minColumnWidth}
+						onrowaction={handleRowAction}>
+					</c-custom-datatable>
+				</div>
+			</div>
+			<template if:true={viewAllUrl}>
+				<div class="footer slds-card__footer">
+					<a class="footer-view_all" onclick={viewAll} href=''>
+						<span>{LABEL.COM_LAB_VIEW_ALL}</span>
+					</a>
+				</div>
+			</template>
+		</template>
+	</article>
+</template>
