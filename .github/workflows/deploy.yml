@@ -1,35 +1,33 @@
-name: Salesforce Deploy  # GitHub Actions 이름
+name: Salesforce Deploy
 
 on:
   push:
     branches:
-      - master  # master 브랜치에 push 될 때만 실행 (main이면 여기 수정)
+      - master  # 필요 시 main으로 수정
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # Ubuntu 최신 이미지에서 작업 실행
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v3  # 현재 GitHub 저장소의 코드 체크아웃
+        uses: actions/checkout@v3
 
       - name: Install Salesforce CLI
-        run: npm install -g sfdx-cli  # Salesforce CLI 전역 설치
+        run: npm install -g sfdx-cli
 
       - name: Generate server.key file
         run: echo "${{ secrets.SALESFORCE_SERVER_KEY }}" > server.key
-        # GitHub Secret에 등록된 개인키(server.key)를 파일로 저장
 
       - name: Authenticate to Salesforce using JWT
         run: |
           sfdx force:auth:jwt:grant \
-            --clientid ${{ secrets.SALESFORCE_CONSUMER_KEY }} \  # Connected App의 Consumer Key
-            --jwtkeyfile server.key \                             # 위에서 만든 개인키 파일
-            --username ${{ secrets.SALESFORCE_USERNAME }} \       # Salesforce 인증에 사용할 유저 ID
-            --instanceurl https://login.salesforce.com \          # Salesforce 로그인 도메인
-            --setdefaultusername                                  # 이 유저를 기본 인증 대상으로 설정
+            --clientid ${{ secrets.SALESFORCE_CONSUMER_KEY }} \
+            --jwtkeyfile server.key \
+            --username ${{ secrets.SALESFORCE_USERNAME }} \
+            --instanceurl https://login.salesforce.com \
+            --setdefaultusername
 
       - name: Deploy source to Salesforce
         run: |
           sfdx force:source:deploy -p force-app -u ${{ secrets.SALESFORCE_USERNAME }}
-          # force-app 폴더 기준으로 전체 소스 배포 실행
