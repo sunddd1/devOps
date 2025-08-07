@@ -3,7 +3,7 @@ name: Deploy to Salesforce (JWT)
 on:
   push:
     branches:
-      - master # 실제 사용하는 브랜치 이름으로 변경 가능 (예: main)
+      - master
 
 jobs:
   deploy:
@@ -13,29 +13,30 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install Salesforce CLI
-        uses: sfdx-actions/setup-sfdx@v1 # 공식 GitHub 액션 추천
+      - name: Install Salesforce CLI (sf)
+        run: |
+          npm install @salesforce/cli --global
 
       - name: Create server.key from Secret
         run: echo "${{ secrets.SF_JWT_KEY }}" > server.key
 
-      - name: Set file permissions for server.key
+      - name: Set permissions for server.key
         run: chmod 600 server.key
 
-      - name: Authenticate to Salesforce (JWT)
+      - name: Authenticate to Salesforce using JWT
         run: |
-          sfdx force:auth:jwt:grant \
-            --clientid "${{ secrets.SF_CONSUMER_KEY }}" \
-            --jwtkeyfile server.key \
-            --username "${{ secrets.SF_USERNAME }}" \
-            --instanceurl https://login.salesforce.com \
-            --setdefaultusername
+          sf org login jwt \
+            --client-id ${{ secrets.SF_CONSUMER_KEY }} \
+            --jwt-key-file server.key \
+            --username ${{ secrets.SF_USERNAME }} \
+            --instance-url https://login.salesforce.com \
+            --set-default
 
       - name: Deploy to Salesforce
         run: |
-          sfdx force:source:deploy \
-            -p force-app \
-            --testlevel RunLocalTests \
+          sf project deploy start \
+            --source-dir force-app \
+            --test-level RunLocalTests \
             --json > deploy-result.json
 
       - name: Show Deployment Result (if failed)
