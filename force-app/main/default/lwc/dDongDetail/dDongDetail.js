@@ -53,7 +53,6 @@ export default class DDongDetail extends LightningElement {
     connectedCallback(){
         console.log('detail @@@@ ', this.objectApiName + ' / ' + this.recordId);
         console.log('test commit');
-        console.log('test commit2222');
         this.getPagelayoytInfo();
     }
 
