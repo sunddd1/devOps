@@ -26,9 +26,9 @@ jobs:
       - name: Authenticate to Salesforce using JWT
         run: |
           sf org login jwt \
-            --client-id ${{ secrets.SF_CONSUMER_KEY }} \
+            --client-id ${{ secrets.SALESFORCE_CONSUMER_KEY }} \
             --jwt-key-file server.key \
-            --username ${{ secrets.SF_USERNAME }} \
+            --username ${{ secrets.SALESFORCE_USERNAME }} \
             --instance-url https://login.salesforce.com \
             --set-default
 
