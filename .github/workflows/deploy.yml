@@ -1,34 +1,40 @@
-name: Deploy to Salesforce
+name: Deploy to Salesforce (JWT)
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master  # 배포를 트리거할 브랜치
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v3
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
 
       - name: Install Salesforce CLI
         run: npm install --global sfdx-cli
 
-      - name: Authenticate with JWT
+      - name: Create server.key from Secret
+        run: echo "${{ secrets.SF_JWT_KEY }}" > server.key
+
+      - name: Authenticate to Salesforce (JWT)
         run: |
-          echo "${{ secrets.SALESFORCE_SERVER_KEY }}" > server.key
           sfdx force:auth:jwt:grant \
-            --clientid ${{ secrets.SALESFORCE_CONSUMER_KEY }} \
+            --clientid ${{ secrets.SF_CONSUMER_KEY }} \
             --jwtkeyfile server.key \
-            --username ${{ secrets.SALESFORCE_USERNAME }} \
+            --username ${{ secrets.SF_USERNAME }} \
             --instanceurl https://login.salesforce.com \
             --setdefaultusername
 
-      - name: Deploy to Org
-        run: sfdx force:source:deploy -p force-app -u ${{ secrets.SALESFORCE_USERNAME }} --wait 10 --verbose
+      - name: Deploy to Salesforce
+        run: |
+          sfdx force:source:deploy \
+            -p force-app \
+            --testlevel RunLocalTests \
+            --json > deploy-result.json
+
+      - name: Show Deployment Result (if failed)
+        if: failure()
+        run: cat deploy-result.json || true
