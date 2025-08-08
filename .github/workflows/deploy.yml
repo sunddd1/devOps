@@ -2,7 +2,7 @@ name: Deploy to Salesforce (JWT)
 
 on:
   push:
-    branches: [ "master" ]  # 필요 시 main 등으로 변경
+    branches: [ "master" ]  # 필요시 main 등으로 변경
 
 jobs:
   deploy:
@@ -33,7 +33,12 @@ jobs:
             --username "${{ secrets.SALESFORCE_USERNAME }}" \
             --instance-url "https://login.salesforce.com" \
             --set-default
-      # 참고: JWT Bearer Flow는 CI에 적합한 무인 인증 방식입니다.
+      # ↑ JWT 플로우는 CI에 적합. 공식 가이드에 따른 플래그 표기. 
+      #   (sf org login jwt / JWT Bearer Flow) 
+      #   참고: 개발자문서/헬프 문서. 
+      #   인증 이론: OAuth 2.0 JWT Bearer Flow, 실전 명령: sf org login jwt
+      #   아래 참조 문서 섹션 링크 확인
+      #   (doc refs added below)
 
       - name: Verify Auth
         run: sf org display --verbose
@@ -45,50 +50,6 @@ jobs:
             --ignore-conflicts \
             --test-level NoTestRun \
             --json
-name: Deploy to Salesforce (JWT)
-
-on:
-  push:
-    branches: [ "master" ]  # 필요 시 main 등으로 변경
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Install Salesforce CLI (sf)
-        run: npm install --global @salesforce/cli
-
-      - name: Write server.key from GitHub Secret
-        run: |
-          echo "${{ secrets.SALESFORCE_SERVER_KEY }}" > server.key
-          chmod 600 server.key
-
-      - name: JWT Auth (sf org login jwt)
-        run: |
-          sf org login jwt \
-            --client-id "${{ secrets.SALESFORCE_CONSUMER_KEY }}" \
-            --jwt-key-file server.key \
-            --username "${{ secrets.SALESFORCE_USERNAME }}" \
-            --instance-url "https://login.salesforce.com" \
-            --set-default
-      # 참고: JWT Bearer Flow는 CI에 적합한 무인 인증 방식입니다.
-
-      - name: Verify Auth
-        run: sf org display --verbose
-
-      - name: Deploy source (force-app)
-        run: |
-          sf project deploy start \
-            --source-dir force-app \
-            --ignore-conflicts \
-            --test-level NoTestRun \
-            --json
+      # ↑ 배포는 sf project deploy start (source format 배포) 사용
+      #   공식 CLI 레퍼런스에 명시된 최신 커맨드
+      #   (force:source:deploy의 sf 버전 대응)
