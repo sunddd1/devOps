@@ -51,7 +51,7 @@ export default class DDongDetail extends LightningElement {
 
   connectedCallback() {
     console.log("detail @@@@ ", this.objectApiName + " / " + this.recordId);
-    console.log("오늘은 스쿼시");
+    console.log("오늘은 ");
     this.getPagelayoytInfo();
   }
 

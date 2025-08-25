@@ -3,13 +3,15 @@ name: Deploy to Salesforce (JWT)
 on:
   push:
     branches: [ "master" ]  # 필요시 main 등으로 변경
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node
@@ -25,7 +27,7 @@ jobs:
           echo "${{ secrets.SALESFORCE_SERVER_KEY }}" > server.key
           chmod 600 server.key
 
-      - name: JWT Auth (sf org login jwt)
+      - name: Authenticate with Salesforce using JWT
         run: |
           sf org login jwt \
             --client-id "${{ secrets.SALESFORCE_CONSUMER_KEY }}" \
@@ -33,23 +35,18 @@ jobs:
             --username "${{ secrets.SALESFORCE_USERNAME }}" \
             --instance-url "https://login.salesforce.com" \
             --set-default
-      # ↑ JWT 플로우는 CI에 적합. 공식 가이드에 따른 플래그 표기. 
-      #   (sf org login jwt / JWT Bearer Flow) 
-      #   참고: 개발자문서/헬프 문서. 
-      #   인증 이론: OAuth 2.0 JWT Bearer Flow, 실전 명령: sf org login jwt
-      #   아래 참조 문서 섹션 링크 확인
-      #   (doc refs added below)
 
-      - name: Verify Auth
+      - name: Verify Auth Connection
         run: sf org display --verbose
 
-      - name: Deploy source (force-app)
+      - name: Deploy updated source (includes Codex enhancements)
         run: |
           sf project deploy start \
             --source-dir force-app \
             --ignore-conflicts \
             --test-level NoTestRun \
             --json
-      # ↑ 배포는 sf project deploy start (source format 배포) 사용
-      #   공식 CLI 레퍼런스에 명시된 최신 커맨드
-      #   (force:source:deploy의 sf 버전 대응)
+
+      # Optional: Add Codex-specific validations or commands here
+      # - name: Run Codex lint/validation (if CLI or script available)
+      #   run: your-codex-validation-command

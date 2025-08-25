@@ -2,49 +2,30 @@
   @description       : 
   @author            : ChangeMeIn@UserSettingsUnder.SFDoc
   @group             : 
-  @last modified on  : 07-22-2025
+  @last modified on  : 08-25-2025
   @last modified by  : 
 -->
 <template>
   <h2>바이브코딩</h2>
 
   <template if:false={isShowModal}>
-    <lightning-spinner
-      size="medium"
-      alternative-text="Loading..."
-    ></lightning-spinner>
+    <lightning-spinner size="medium" alternative-text="Loading..."></lightning-spinner>
     <div style="height: 20vh"></div>
   </template>
   <div class="ddongStyle">
     <div>
-      <lightning-button
-        label="Toast Msg"
-        variant="brand-outline"
-        onclick={handleToastMsg}
-        style="margin-left: 10px"
-      ></lightning-button>
+      <lightning-button label="Toast Msg" variant="brand-outline" onclick={handleToastMsg}
+        style="margin-left: 10px"></lightning-button>
     </div>
-    <lightning-record-edit-form
-      object-api-name={objectApiName}
-      record-id={recordId}
-      density="auto"
-    >
+    <lightning-record-edit-form object-api-name={objectApiName} record-id={recordId} density="auto">
       <!-- class="slds-p-left_x-small" -->
       <template for:each={pageInfo} for:item="sectionInfo">
         <div key={sectionInfo} class="custom-section">
           <template if:true={sectionInfo.sectionVissible}>
-            <h3
-              class="slds-theme--shade slds-section__title section-label"
-              onclick={handleSectionVissble}
-            >
+            <h3 class="slds-theme--shade slds-section__title section-label" onclick={handleSectionVissble}>
               <div class="slds-section__title-action">
-                <lightning-icon
-                  icon-name="utility:chevrondown"
-                  alternative-text={iconName}
-                  title={iconName}
-                  size="x-small"
-                  class="custom-Icon"
-                ></lightning-icon>
+                <lightning-icon icon-name="utility:chevrondown" alternative-text={iconName} title={iconName}
+                  size="x-small" class="custom-Icon"></lightning-icon>
                 <span class="slds-p-left_xx-small">
                   {sectionInfo.sectionLabel}
                 </span>
@@ -65,14 +46,9 @@
                     <tr key={fieldInfo}>
                       <td class="field-td">
                         <template if:true={fieldInfo.fieldName}>
-                          <div
-                            class="slds-border_bottom"
-                            style="display: flex; margin-bottom: 0.25rem"
-                          >
-                            <lightning-output-field
-                              field-name={fieldInfo.fieldName}
-                              style="margin-bottom: 0.25rem"
-                            ></lightning-output-field>
+                          <div class="slds-border_bottom" style="display: flex; margin-bottom: 0.25rem">
+                            <lightning-output-field field-name={fieldInfo.fieldName}
+                              style="margin-bottom: 0.25rem"></lightning-output-field>
                             <!-- <lightning-input-field field-name={fieldInfo.fieldName} style="margin-bottom: 0.25rem;"></lightning-input-field> -->
                           </div>
                         </template>
@@ -92,15 +68,9 @@
               <template for:each={sectionInfo.fieldInfos} for:item="row">
                 <div key={row} style="height: fit-content">
                   <template for:each={row} for:item="fieldInfo">
-                    <div
-                      key={fieldInfo}
-                      class="field-td"
-                      style="height: fit-content !important"
-                    >
+                    <div key={fieldInfo} class="field-td" style="height: fit-content !important">
                       <div class="slds-border_bottom isOneColumn">
-                        <lightning-output-field
-                          field-name={fieldInfo.fieldName}
-                        ></lightning-output-field>
+                        <lightning-output-field field-name={fieldInfo.fieldName}></lightning-output-field>
                       </div>
                     </div>
                   </template>
@@ -162,11 +132,7 @@
       </template>
     </lightning-record-edit-form>
     <div>
-      <lightning-file-upload
-        label="Attach File"
-        name="fileUploader"
-        record-id={recordId}
-      >
+      <lightning-file-upload label="Attach File" name="fileUploader" record-id={recordId}>
       </lightning-file-upload>
     </div>
   </div>
