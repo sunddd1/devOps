@@ -6,81 +6,111 @@
   @last modified by  : 
 -->
 <template>
-    
-    <template if:false={isShowModal}>
-        <lightning-spinner size="medium" alternative-text="Loading..."></lightning-spinner>
-        <div style="height: 20vh;"></div>
-    </template>
-    <div class="ddongStyle">
-        <div>
-            <lightning-button label="Toast Msg" variant="brand-outline" onclick={handleToastMsg} style="margin-left: 10px;"></lightning-button>
-        </div>
-        <lightning-record-edit-form
-        object-api-name={objectApiName}
-        record-id={recordId}
-        density="auto"
-        >
-        <!-- class="slds-p-left_x-small" -->
-            <template for:each={pageInfo} for:item="sectionInfo">
-                <div key={sectionInfo} class="custom-section">
-                    <template if:true={sectionInfo.sectionVissible}>
-                        <h3 class="slds-theme--shade slds-section__title section-label" onclick={handleSectionVissble}>
-                            <div class="slds-section__title-action">
-                                <lightning-icon icon-name="utility:chevrondown" alternative-text={iconName} title={iconName} size="x-small" class="custom-Icon"></lightning-icon>
-                                <span class="slds-p-left_xx-small">
-                                    {sectionInfo.sectionLabel}
-                                </span>
-                            </div>
-                        </h3>
-                        <!-- <div class="slds-section__title" onclick={handleSectionVissble}>
+  <h2>바이브코딩</h2>
+
+  <template if:false={isShowModal}>
+    <lightning-spinner
+      size="medium"
+      alternative-text="Loading..."
+    ></lightning-spinner>
+    <div style="height: 20vh"></div>
+  </template>
+  <div class="ddongStyle">
+    <div>
+      <lightning-button
+        label="Toast Msg"
+        variant="brand-outline"
+        onclick={handleToastMsg}
+        style="margin-left: 10px"
+      ></lightning-button>
+    </div>
+    <lightning-record-edit-form
+      object-api-name={objectApiName}
+      record-id={recordId}
+      density="auto"
+    >
+      <!-- class="slds-p-left_x-small" -->
+      <template for:each={pageInfo} for:item="sectionInfo">
+        <div key={sectionInfo} class="custom-section">
+          <template if:true={sectionInfo.sectionVissible}>
+            <h3
+              class="slds-theme--shade slds-section__title section-label"
+              onclick={handleSectionVissble}
+            >
+              <div class="slds-section__title-action">
+                <lightning-icon
+                  icon-name="utility:chevrondown"
+                  alternative-text={iconName}
+                  title={iconName}
+                  size="x-small"
+                  class="custom-Icon"
+                ></lightning-icon>
+                <span class="slds-p-left_xx-small">
+                  {sectionInfo.sectionLabel}
+                </span>
+              </div>
+            </h3>
+            <!-- <div class="slds-section__title" onclick={handleSectionVissble}>
                             <H3 class="slds-section__title-action" style="padding-left:0px">
                                 <lightning-button-icon icon-name="utility:chevrondown" class="custom-Icon"></lightning-button-icon>
                                 <span >{sectionInfo.sectionLabel}</span>
                             </H3>
                         </div> -->
-                    </template>
-                    <template if:false={sectionInfo.isOneColumns}>
-                        <div class="section-div">
-                            <template for:each={sectionInfo.fieldInfos} for:item="row">
-                                <table key={row} style="height: fit-content;">
-                                    <template for:each={row} for:item="fieldInfo">
-                                        <tr key={fieldInfo}>
-                                            <td class="field-td">
-                                                <template if:true={fieldInfo.fieldName}>
-                                                    <div class="slds-border_bottom" style="display: flex; margin-bottom: 0.25rem;" >
-                                                        <lightning-output-field field-name={fieldInfo.fieldName} style="margin-bottom: 0.25rem;"></lightning-output-field>
-                                                        <!-- <lightning-input-field field-name={fieldInfo.fieldName} style="margin-bottom: 0.25rem;"></lightning-input-field> -->
-                                                    </div>
-                                                </template>
-                                                <template if:false={fieldInfo.fieldName}>
-                                                    <div style="height: 32px !important;"></div>
-                                                </template>
-                                            </td>
-                                        </tr>
-                                    </template>
-                                </table>
-                            </template>
-                        </div>
-                    </template>
+          </template>
+          <template if:false={sectionInfo.isOneColumns}>
+            <div class="section-div">
+              <template for:each={sectionInfo.fieldInfos} for:item="row">
+                <table key={row} style="height: fit-content">
+                  <template for:each={row} for:item="fieldInfo">
+                    <tr key={fieldInfo}>
+                      <td class="field-td">
+                        <template if:true={fieldInfo.fieldName}>
+                          <div
+                            class="slds-border_bottom"
+                            style="display: flex; margin-bottom: 0.25rem"
+                          >
+                            <lightning-output-field
+                              field-name={fieldInfo.fieldName}
+                              style="margin-bottom: 0.25rem"
+                            ></lightning-output-field>
+                            <!-- <lightning-input-field field-name={fieldInfo.fieldName} style="margin-bottom: 0.25rem;"></lightning-input-field> -->
+                          </div>
+                        </template>
+                        <template if:false={fieldInfo.fieldName}>
+                          <div style="height: 32px !important"></div>
+                        </template>
+                      </td>
+                    </tr>
+                  </template>
+                </table>
+              </template>
+            </div>
+          </template>
 
-                    <template if:true={sectionInfo.isOneColumns}>
-                        <div class="onerich" style="padding-top: 8px;">
-                            <template for:each={sectionInfo.fieldInfos} for:item="row">
-                                <div key={row} style="height: fit-content;">
-                                    <template for:each={row} for:item="fieldInfo">
-                                        <div key={fieldInfo} class="field-td" style="height: fit-content !important;">
-                                            <div class="slds-border_bottom isOneColumn">
-                                                <lightning-output-field field-name={fieldInfo.fieldName}></lightning-output-field>
-                                            </div>
-                                        </div>
-                                    </template>
-                                </div>
-                            </template>
-                        </div>
-                    </template>
+          <template if:true={sectionInfo.isOneColumns}>
+            <div class="onerich" style="padding-top: 8px">
+              <template for:each={sectionInfo.fieldInfos} for:item="row">
+                <div key={row} style="height: fit-content">
+                  <template for:each={row} for:item="fieldInfo">
+                    <div
+                      key={fieldInfo}
+                      class="field-td"
+                      style="height: fit-content !important"
+                    >
+                      <div class="slds-border_bottom isOneColumn">
+                        <lightning-output-field
+                          field-name={fieldInfo.fieldName}
+                        ></lightning-output-field>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </template>
+            </div>
+          </template>
 
-                    <!-- 편집 -->
-                    <!-- <template if:false={sectionInfo.isOneColumns}>
+          <!-- 편집 -->
+          <!-- <template if:false={sectionInfo.isOneColumns}>
                         <div class="section-div">
                             <template for:each={sectionInfo.fieldInfos} for:item="row">
                                 <table key={row} style="height: fit-content;">
@@ -128,16 +158,16 @@
                             </template>
                         </div>
                     </template> -->
-
-                </div>
-            </template>
-        </lightning-record-edit-form>
-        <div>
-            <lightning-file-upload
-                label="Attach File"
-                name="fileUploader"
-                record-id={recordId}>
-            </lightning-file-upload>
         </div>
+      </template>
+    </lightning-record-edit-form>
+    <div>
+      <lightning-file-upload
+        label="Attach File"
+        name="fileUploader"
+        record-id={recordId}
+      >
+      </lightning-file-upload>
     </div>
+  </div>
 </template>
