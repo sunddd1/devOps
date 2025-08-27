@@ -2,7 +2,7 @@
  * @description       :
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             :
- * @last modified on  : 08-08-2025
+ * @last modified on  : 08-27-2025
  * @last modified by  : 
  **/
 import { LightningElement, api, track, wire } from "lwc";
@@ -51,7 +51,7 @@ export default class DDongDetail extends LightningElement {
 
   connectedCallback() {
     console.log("detail @@@@ ", this.objectApiName + " / " + this.recordId);
-    console.log("오늘은 ");
+    console.log("오늘은 13331");
     this.getPagelayoytInfo();
   }
 

@@ -1,0 +1,34 @@
+<template>
+    <lightning-modal-header label="Bread Price Comparison"></lightning-modal-header>
+    <lightning-modal-body>
+        <template if:true={products}>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Product Category</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={products} for:item="product">
+                        <tr key={product.id}>
+                            <td>{product.name}</td>
+                            <td>{product.categoryName}</td>
+                            <td>{product.price}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+            <template if:true={priceDifference}>
+                <p>Price difference: {priceDifference}</p>
+            </template>
+        </template>
+        <template if:true={error}>
+            <p>{error}</p>
+        </template>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button label="Close" onclick={handleClose}></lightning-button>
+    </lightning-modal-footer>
+</template>
